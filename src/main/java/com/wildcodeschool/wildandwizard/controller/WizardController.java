@@ -20,16 +20,13 @@ public class WizardController {
 
     @GetMapping("/wizards")
     public String getAll(Model model) {
-
         model.addAttribute("wizards", repository.findAll());
-
         return "wizards";
     }
 
     @GetMapping("/wizard")
     public String getWizard(Model model,
                             @RequestParam(required = false) Long id) {
-
         Wizard wizard = new Wizard();
         if (id != null) {
             Optional<Wizard> optionalWizard = repository.findById(id);
@@ -38,22 +35,18 @@ public class WizardController {
             }
         }
         model.addAttribute("wizard", wizard);
-
         return "wizard";
     }
 
     @PostMapping("/wizard")
     public String postWizard(@ModelAttribute Wizard wizard) {
-
         repository.save(wizard);
         return "redirect:/wizards";
     }
 
     @GetMapping("/wizard/delete")
     public String deleteWizard(@RequestParam Long id) {
-
         repository.deleteById(id);
-
         return "redirect:/wizards";
     }
 }
